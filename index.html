@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alex Cantu | Web3 Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+
+    body {
+      background: radial-gradient(circle at top, #0a0a1a, #000);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 60px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999;
+      background: rgba(10, 10, 25, 0.7);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid transparent;
+      animation: borderGlow 3s linear infinite;
+    }
+
+    @keyframes borderGlow {
+      0% { border-image: linear-gradient(90deg, #80ffea, #b97fff) 1; }
+      50% { border-image: linear-gradient(90deg, #b97fff, #80ffea) 1; }
+      100% { border-image: linear-gradient(90deg, #80ffea, #b97fff) 1; }
+    }
+
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 3px solid #80ffea;
+      box-shadow: 0 0 20px #b97fff;
+      animation: floatAvatar 5s ease-in-out infinite;
+      transition: 0.4s;
+    }
+    .logo .avatar:hover {
+      transform: rotate(10deg) scale(1.1);
+      box-shadow: 0 0 30px #80ffea;
+    }
+
+    @keyframes floatAvatar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    nav a {
+      color: #fff;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav a:hover { color: #80ffea; }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      animation: fadeIn 2s ease;
+    }
+
+    .hero h2 {
+      font-size: 2.8rem;
+      text-shadow: 0 0 15px #80ffea;
+    }
+
+    .hero p {
+      color: #cfcfcf;
+      margin: 15px 0;
+      font-size: 1.1rem;
+    }
+
+    .socials a {
+      color: #80ffea;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .socials a:hover { color: #b97fff; }
+
+    #candleBackground, #particleLayer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    section { padding: 100px 60px; text-align: center; }
+
+    .about, .projects, .reviews, .contact {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 15px;
+      margin: 60px auto;
+      max-width: 1100px;
+      box-shadow: 0 0 25px rgba(120, 0, 255, 0.2);
+    }
+
+    .about p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #d0d0d0;
+      margin-top: 10px;
+    }
+
+    .project-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .project-card {
+      width: 280px;
+      padding: 20px;
+      border-radius: 15px;
+      background: rgba(30, 30, 50, 0.7);
+      transition: 0.4s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 25px #80ffea;
+    }
+
+    .project-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .reviews {
+      padding: 100px 60px;
+    }
+
+    .review-card {
+      background: rgba(25, 25, 50, 0.8);
+      margin: 20px auto;
+      padding: 25px;
+      border-radius: 15px;
+      max-width: 900px;
+      text-align: left;
+      box-shadow: 0 0 15px rgba(120, 0, 255, 0.3);
+      transition: 0.4s;
+    }
+
+    .review-card:hover {
+      box-shadow: 0 0 25px #80ffea;
+      transform: scale(1.02);
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .stars { color: gold; }
+
+    .review-link a {
+      color: #80ffea;
+      text-decoration: none;
+    }
+
+    footer {
+      padding: 20px;
+      text-align: center;
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    /* Motion Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="assets/images/avatar.jpg" alt="Alex Cantu Logo" class="avatar">
+      <h1>Alex Cantu</h1>
+    </div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <canvas id="candleBackground"></canvas>
+    <div class="hero-content">
+      <h2>Web3 Advocate & Community Builder</h2>
+      <p>Empowering decentralized futures through community engagement, creative energy, and crypto growth.</p>
+      <div class="socials">
+        <a href="https://t.me/Cantualexx" target="_blank">Telegram</a>
+        <a href="https://x.com/rlapint" target="_blank">Twitter</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about reveal">
+    <h2>About Me</h2>
+    <p>I’m <strong>Alex Cantu</strong>, a Web3 strategist, meme designer, and community growth leader with a passion for building unstoppable crypto movements. From shilling and raiding to project management and design, I help Web3 communities grow organically with real engagement, hype, and strong vibes. My goal is to make every project I touch stand out in the crypto space through energy, memes, and vision.</p>
+  </section>
+
+  <section id="projects" class="projects reveal">
+    <h2>Featured Roles</h2>
+    <div class="project-grid">
+      <div class="project-card"><img src="assets/images/riseoftrump.png"><h3>Community Manager</h3><p>Rise of Trump (Billions)</p></div>
+      <div class="project-card"><img src="assets/images/crazylive.png"><h3>Raiding & Shilling</h3><p>Crazylive</p></div>
+      <div class="project-card"><img src="assets/images/powercouple.png"><h3>Raider</h3><p>Powercouple Coin</p></div>
+      <div class="project-card"><img src="assets/images/powercouple.png"><h3>Raider</h3><p>MegaWhisky</p></div>
+      <div class="project-card"><img src="assets/images/riseoftrump.png"><h3>Project Manager</h3><p>Make Cryptocurrency Great Again</p></div>
+      <div class="project-card"><img src="assets/images/crazylive.png"><h3>Shill Leader</h3><p>Proof of Trump</p></div>
+    </div>
+  </section>
+
+  <section id="reviews" class="reviews reveal">
+    <h2>What People Say</h2>
+
+    <div class="review-card">
+      <div class="review-header">
+        <h3>Rise of Trump (Billions)</h3><span class="stars">★★★★★</span>
+      </div>
+      <p>“Alex was an incredible Community Manager. He kept our chat alive, hosted events, and made the community fun.”</p>
+      <div class="review-link"><a href="https://t.me/+p8-AZG_gB342MDU0" target="_blank">Join Community</a></div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header"><h3>Crazylive</h3><span class="stars">★★★★★</span></div>
+      <p>“A true shilling machine! Alex brought insane energy and engagement to every post.”</p>
+      <div class="review-link"><a href="https://t.me/crazylivetoken" target="_blank">Join Crazylive</a></div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header"><h3>Powercouple Coin</h3><span class="stars">★★★★★</span></div>
+      <p>“Alex is one of the most dedicated raiders we’ve had — pure fire in every campaign.”</p>
+      <div class="review-link"><a href="https://t.me/+68rLWd1kCh82YWNh" target="_blank">Join Powercouple</a></div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header"><h3>MegaWhisky</h3><span class="stars">★★★★★</span></div>
+      <p>“A true raider legend! Alex helped us trend with unmatched hype and meme skills.”</p>
+      <div class="review-link"><a href="https://t.me/megawhisky" target="_blank">Join MegaWhisky</a></div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header"><h3>Make Cryptocurrency Great Again</h3><span class="stars">★★★★★</span></div>
+      <p>“As a project manager, Alex brought organization, passion, and great team energy.”</p>
+      <div class="review-link"><a href="https://t.me/Make_cryptoGA" target="_blank">Join MCGA</a></div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header"><h3>Proof of Trump</h3><span class="stars">★★★★★</span></div>
+      <p>“Alex led the shill team like a pro — creative, strategic, and powerful presence in the community.”</p>
+      <div class="review-link"><a href="https://t.me/+UJxmDkhOix81Mzg0" target="_blank">Join Proof of Trump</a></div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact reveal">
+    <h2>Let’s Connect</h2>
+    <p>Want to collaborate or grow your Web3 community? Let’s make your project shine in the crypto space.</p>
+    <div class="socials">
+      <a href="https://t.me/Cantualexx" target="_blank">Telegram</a>
+      <a href="https://x.com/rlapint" target="_blank">Twitter</a>
+    </div>
+  </section>
+
+  <footer><p>© 2025 Alex Cantu | Web3 Portfolio</p></footer>
+
+  <script>
+    // Reveal Animation
+    window.addEventListener("scroll", () => {
+      document.querySelectorAll(".reveal").forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) el.classList.add("active");
+      });
+    });
+
+    // Candle Background Animation
+    const canvas = document.getElementById("candleBackground");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let candles = [];
+    function createCandle() {
+      return {
+        x: Math.random() * canvas.width,
+        y: canvas.height + 20,
+        height: Math.random() * 60 + 40,
+        width: 5,
+        color: Math.random() > 0.5 ? "#00ff88" : "#ff007f",
+        speed: Math.random() * 1.5 + 0.5
+      };
+    }
+    for (let i = 0; i < 80; i++) candles.push(createCandle());
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      candles.forEach(c => {
+        ctx.fillStyle = c.color;
+        ctx.fillRect(c.x, c.y, c.width, -c.height);
+        c.y -= c.speed;
+        if (c.y + c.height < 0) Object.assign(c, createCandle());
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
